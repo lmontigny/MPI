@@ -1,3 +1,5 @@
+// Source: https://computing.llnl.gov/tutorials/mpi/  
+
    #include "mpi.h"
    #include <stdio.h>
    #define SIZE 16
