@@ -1,0 +1,4 @@
+#! /bin/bash --login
+
+qsub -V -pe impi_fillup_mark2 4 sharpen-eddie.sge
+

@@ -1,0 +1,13 @@
+#!/bin/bash --login
+
+# PBS job options (name, processor cores, job time)
+#PBS -N dacsharpen
+#PBS -l ncpus=1
+#PBS -l walltime=00:01:00
+
+# Change to the directory that the job was submitted from
+# (remember this should be on the /work filesystem)
+cd $PBS_O_WORKDIR
+
+# Launch the serial job, i.e. run on one process
+./sharpen

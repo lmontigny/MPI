@@ -1,0 +1,17 @@
+#!/bin/bash --login
+
+# PBS job options (name, processor cores, job time)
+#PBS -N dacsharpen
+#PBS -l ncpus=4
+#PBS -l walltime=00:10:00
+
+# Load MPI
+module load openmpi-x86_64
+module load anaconda
+
+# Change to the directory that the job was submitted from
+# (remember this should be on the /work filesystem)
+cd $PBS_O_WORKDIR
+
+# Launch the parallel job, e.g. run on four processes
+mpiexec -n 4 python sharpen.py

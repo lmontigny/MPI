@@ -1,0 +1,48 @@
+MF=	Makefile
+
+#COMPILER
+CC=	cc
+# On ARCHER, cc is a wrapper for whichever C compiler - GNU (gcc), Intel (icc), or Cray (craycc) - has been chosen by loading the appropriate PrgEnv module prior to compilation.
+
+#For the Data Analytic Cluster use gcc
+#CC=	gcc
+
+CFLAGS=	-g -DC_OPENMP_PRACTICAL
+#For the Data Analytic Cluster, enable OpenMP
+#CFLAGS=	-g -DC_OPENMP_PRACTICAL -fopenmp
+LFLAGS=	-lm
+
+EXE=	sharpen
+
+SRC= \
+	sharpen.c \
+	dosharpen.c \
+	filter.c \
+	cio.c \
+	utilities.c
+
+INC = \
+	sharpen.h \
+	utilities.h
+
+#
+# No need to edit below this line
+#
+
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+OBJ=	$(SRC:.c=.o)
+
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+all:	$(EXE)
+
+$(EXE):	$(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LFLAGS)
+
+$(OBJ):	$(MF) $(INC)
+
+clean:
+	rm -f $(OBJ) $(EXE) core

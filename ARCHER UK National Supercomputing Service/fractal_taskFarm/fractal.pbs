@@ -1,0 +1,15 @@
+#!/bin/bash --login
+
+# PBS job options (name, compute nodes, job time)
+#PBS -N fractal
+#PBS -l select=1
+#PBS -l walltime=00:01:00
+#PBS -A y14
+
+# Change to the directory that the job was submitted from
+# (remember this should be on the /work filesystem)
+cd $PBS_O_WORKDIR
+
+# Launch the parallel job using 17 processes (16 workers)
+# Use only 16 tasks, i.e. one task per worker (the image is 768x768)
+aprun -n 17 ./fractal -t 192
